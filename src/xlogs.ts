@@ -12,7 +12,9 @@ const effects: Record<string, string> = {
 // 修复2: 为styles添加完整类型定义
 interface WeatherStyle {
     color: string;
+    bg: string;
     icon: string;
+    css?: string;
 }
 
 interface Styles {
@@ -27,9 +29,24 @@ interface Styles {
 const styles: Styles = {
     // ... 保留原有样式 ...
     weather: {
-        sunny: { color: '\x1b[38;5;226m', icon: '☀️' },
-        rainy: { color: '\x1b[38;5;45m', icon: '🌧️' },
-        cloudy: { color: '\x1b[38;5;250m', icon: '☁️' }
+        sunny: { 
+            color: '\x1b[38;5;226m',
+            bg: '\x1b[48;5;230m',
+            icon: '☀️',
+            css: 'background: linear-gradient(to right, #FFD700, #FFFACD); color: #DAA520;'
+        },
+        rainy: {
+            color: '\x1b[38;5;33m',
+            bg: '\x1b[48;5;195m',
+            icon: '🌧️',
+            css: 'background: linear-gradient(to right, #4682B4, #E6F2FF); color: #1E90FF;'
+        },
+        cloudy: {
+            color: '\x1b[38;5;250m',
+            bg: '\x1b[48;5;255m',
+            icon: '☁️',
+            css: 'background: linear-gradient(to right, #778899, #F5F5F5); color: #696969;'
+        }
     }
 };
 
@@ -103,12 +120,19 @@ export const xlogs: Xlogs = {
      */
     weather(type: keyof typeof styles.weather, message: string) {
         const style = styles.weather[type];
+        const gradientStyle = style.css || `${ansiToCSS(style.color)}${ansiToCSS(style.bg)}`;
+        
         console.log(
             `%c${style.icon} ${message}`,
-            `${ansiToCSS(style.color)}; font-size: 14px; padding: 6px 10px;`
+            `${gradientStyle}; 
+             font-size: 14px; 
+             padding: 6px 12px;
+             border-radius: 8px;
+             margin: 4px 0;
+             box-shadow: 0 2px 4px rgba(0,0,0,0.1);`
         );
     },
-
+    
     /**
      * ASCII艺术边框
      * @param message 消息内容
@@ -116,14 +140,43 @@ export const xlogs: Xlogs = {
      */
     ascii(message: string, art: 'box' | 'cloud' | 'wave') {
         const arts = {
-            box: `╭───────────────────╮\n│ ${message} │\n╰───────────────────╯`,
-            cloud: `  .-~~~-.\n /       \\\n| ${message.padEnd(16)} |\n \\       /\n  '-~~~-'`,
-            wave: `~^-~^-~^-~^-~^-~\n ${message}\n~^-~^-~^-~^-~^-~`
+            box: `
+┌───────────────────────┐
+│                       │
+│   ${message.padEnd(18).toUpperCase()}   │
+│                       │
+└───────────────────────┘
+`,
+            cloud: `
+   ╭───────────╮
+  /  ${message.padEnd(12)}  \\
+ ╰───────────╯
+    ╰─┬───┬─╯
+      ╰───╯
+`,
+            wave: `
+  ~~~^~~~^~~~^~~~^~~~
+      ${message}
+  ~~~^~~~^~~~^~~~^~~~
+`
         };
-        console.log(`%c${arts[art]}`, 'font-family: monospace;');
+        
+        const styles = {
+            box: 'color: #4CAF50; font-weight: bold; text-shadow: 0 0 2px rgba(76,175,80,0.5);',
+            cloud: 'color: #03A9F4; text-shadow: 0 0 2px rgba(3,169,244,0.3);',
+            wave: 'color: #00BCD4; font-style: italic;'
+        };
+        
+        console.log(`%c${arts[art]}`, `
+            ${styles[art]}
+            font-family: 'Courier New', monospace;
+            line-height: 1.4;
+            white-space: pre;
+            letter-spacing: 1px;
+        `);
     },
 
-    /**
+    /** 
      * 3D文字横幅
      * @param text 横幅文字
      * @param style 3d|neon|outline

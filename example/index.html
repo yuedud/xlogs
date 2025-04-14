@@ -13,21 +13,24 @@
     <script type="module">
         import {xlogs} from './dist/xlogs.esm.js';
 
-        // 聊天对话效果
-        xlogs.bubble('你好呀！', 'bot');
-        xlogs.bubble('这个日志库太酷了！', 'user');
+        // 气泡对话 - 展示所有类型
+        xlogs.bubble('你好，我是机器人', 'bot');
+        xlogs.bubble('你好，我是用户', 'user');
 
-        // 天气主题
-        xlogs.weather('sunny', '今天天气晴朗');
-        xlogs.weather('rainy', '记得带伞哦');
+        // 天气主题 - 展示所有天气类型
+        xlogs.weather('sunny', '今天阳光明媚');
+        xlogs.weather('rainy', '外面正在下雨');
+        xlogs.weather('cloudy', '今天多云转阴');
 
-        // ASCII艺术
-        xlogs.ascii('重要通知', 'box');
-        xlogs.ascii('警告', 'cloud');
+        // ASCII艺术 - 展示所有边框类型
+        xlogs.ascii('通知', 'box');
+        xlogs.ascii('提示', 'cloud');
+        xlogs.ascii('波浪', 'wave');
 
-        // 3D文字
-        xlogs.banner('XLOGS', '3d');
-        xlogs.banner('v2.0', 'neon');
+        // 3D文字 - 展示所有特效类型
+        xlogs.banner('欢迎', 'shadow');
+        xlogs.banner('XLOGS', 'neon');
+        xlogs.banner('v2.0', 'outline');
 
     </script>
 </body>

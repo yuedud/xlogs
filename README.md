@@ -20,6 +20,9 @@
 npm install xlogs
 # 或
 yarn add xlogs
+```
+
+### 使用示例
 
 ```javascript
 import { xlogs } from 'xlogs';
@@ -42,7 +45,43 @@ xlogs.banner('XLOGS', 'neon');
 
 ## 📚 API文档
 ### 主要方法 
-bubble(message: string, type: 'user' | 'bot') 显示聊天气泡样式
-weather(type: 'sunny' | 'rainy' | 'cloudy', message: string) 显示带天气图标的日志
-ascii(message: string, art: 'box' | 'cloud' | 'wave') 显示ASCII艺术边框
-banner(text: string, style: '3d' | 'neon' | 'outline') 显示3D效果文字横幅# xlogs
+
+#### `bubble(message: string, type: 'user' | 'bot')`
+**功能**：显示聊天气泡样式  
+**参数**：
+- `message`: 要显示的消息内容
+- `type`: 气泡类型，`user`(用户)或`bot`(机器人)  
+**示例**：
+```javascript
+xlogs.bubble('你好！', 'bot');
+xlogs.bubble('我收到了', 'user');
+```
+#### `weather(weather: 'sunny' | 'rainy' | 'cloudy', message: string)`
+**功能**：显示天气主题样式
+**参数**：
+- `weather`: 天气类型，`sunny`(晴天)、`rainy`(雨天)或`cloudy`(多云)
+- `message`: 要显示的消息内容
+**示例**：
+```javascript
+xlogs.weather('sunny', '今天天气很好！');
+xlogs.weather('rainy', '记得带伞'); 
+```
+#### `ascii(message: string, type: 'box' | 'cloud' | 'wave')`
+**功能**：显示ASCII艺术样式
+**参数**：
+- `message`: 要显示的消息内容
+- `type`: 边框类型，`box`(方框)、`cloud`(云朵)或`wave`(波浪)
+**示例**：
+```javascript
+xlogs.ascii('重要', 'box');
+xlogs.ascii('警告', 'cloud');
+```
+#### `banner(message: string, type: 'shadow' | 'neon' | 'outline')`
+**功能**：显示3D文字样式
+**参数**：
+- `message`: 要显示的消息内容
+- `type`: 特效类型，`shadow`(阴影)、`neon`(霓虹)或`outline`(轮廓)
+**示例**：
+```javascript
+xlogs.banner('XLOGS', 'neon');  
+```
