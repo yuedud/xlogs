@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>xlogs HTML Demo</title>
+</head>
+<body>
+    <h1>xlogs 模块使用示例</h1>
+    <p>打开浏览器控制台查看日志输出。</p>
+
+    <!-- 引入编译后的 xlogs 模块 -->
+    <script type="module">
+        import {xlogs} from './dist/xlogs.esm.js';
+
+        // 聊天对话效果
+        xlogs.bubble('你好呀！', 'bot');
+        xlogs.bubble('这个日志库太酷了！', 'user');
+
+        // 天气主题
+        xlogs.weather('sunny', '今天天气晴朗');
+        xlogs.weather('rainy', '记得带伞哦');
+
+        // ASCII艺术
+        xlogs.ascii('重要通知', 'box');
+        xlogs.ascii('警告', 'cloud');
+
+        // 3D文字
+        xlogs.banner('XLOGS', '3d');
+        xlogs.banner('v2.0', 'neon');
+
+    </script>
+</body>
+</html>
